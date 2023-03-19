@@ -1,11 +1,11 @@
-#ARG BUILDX_VERSION=0.10.4
-#ARG DOCKER_VERSION=latest
+ARG BUILDX_VERSION=0.10.4
+ARG DOCKER_VERSION=latest
 
 FROM alpine AS fetcher
 
 RUN apk add curl bash 
 
-#ARG BUILDX_VERSION
+ARG BUILDX_VERSION
 ARG DOCKER_VERSION
 COPY setup.sh /
 RUN /bin/bash /setup.sh
