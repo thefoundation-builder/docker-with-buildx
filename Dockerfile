@@ -7,8 +7,8 @@ RUN apk add curl bash
 
 ARG BUILDX_VERSION
 ARG DOCKER_VERSION
-COPY setup.sh /
-RUN /bin/bash /setup.sh
+COPY setup.sh /root/.setup.sh
+RUN /bin/bash /root/.setup.sh
 
 
 FROM docker:${DOCKER_VERSION}
@@ -24,5 +24,6 @@ RUN (test -e /etc/scripts||mkdir /etc/scripts) || true
 RUN git clone https://gitlab.com/the-foundation/docker-squash-multiarch.git /etc/scripts/docker-squash-multiarch
 RUN ln -s /etc/scripts/docker-squash-multiarch/docker-squash-multiarch.sh /usr/bin/docker-squash-multiarch
 RUN chmod +x /etc/scripts/docker-squash-multiarch/docker-squash-multiarch.sh || true 
-
-RUN for thingy in regctl regbot regsync skopeo ;do which "$thingy";done
+COPY finalize.sh /root/.finalize.sh
+RUN /bin/bash    /root/.finalize.sh
+RUN for thingy in regctl regbot regsync skopeo docker-squash ;do which "$thingy";done
