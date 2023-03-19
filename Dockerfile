@@ -25,3 +25,4 @@ RUN git clone https://gitlab.com/the-foundation/docker-squash-multiarch.git /etc
 RUN ln -s /etc/scripts/docker-squash-multiarch/docker-squash-multiarch.sh /usr/bin/docker-squash-multiarch
 RUN chmod +x /etc/scripts/docker-squash-multiarch/docker-squash-multiarch.sh || true 
 
+RUN for thingy in regctl regbot regsync skopeo ;do which "$thingy";done
