@@ -10,7 +10,7 @@ ARG DOCKER_VERSION
 COPY setup.sh /root/.setup.sh
 RUN /bin/bash /root/.setup.sh
 
-
+## FAILED: docker:latest is only aarch64 and amd64
 #FROM docker:${DOCKER_VERSION}
 FROM alpine
 RUN apk add curl  sed grep date jq bash curl bind-tools git bash jq procps date bash docker docker-compose docker-cli ca-certificates ip6tables py3-pip skopep
