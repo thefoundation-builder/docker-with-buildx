@@ -11,8 +11,9 @@ COPY setup.sh /root/.setup.sh
 RUN /bin/bash /root/.setup.sh
 
 
-FROM docker:${DOCKER_VERSION}
-
+#FROM docker:${DOCKER_VERSION}
+FROM alpine
+RUN apk add curl git bash jq procps date bash docker docker-compose docker-cli ca-certificates ip6tables py3-pip
 COPY --from=fetcher /docker-buildx /usr/lib/docker/cli-plugins/docker-buildx
 COPY --from=fetcher /regctl /usr/lib/docker/cli-plugins/regctl
 COPY --from=fetcher /regbot /usr/lib/docker/cli-plugins/regbot
