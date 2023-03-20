@@ -13,13 +13,11 @@ RUN /bin/bash /root/.setup.sh
 ## FAILED: docker:latest is only aarch64 and amd64
 #FROM docker:${DOCKER_VERSION}
 FROM alpine
-RUN apk add curl  sed grep date jq bash curl bind-tools git bash jq procps date bash docker docker-compose docker-cli ca-certificates ip6tables py3-pip skopep
+RUN apk add curl  sed grep date jq bash curl bind-tools git bash jq procps date bash docker docker-compose docker-cli ca-certificates ip6tables py3-pip skopeo
 COPY --from=fetcher /docker-buildx /usr/lib/docker/cli-plugins/docker-buildx
 COPY --from=fetcher /regctl /usr/lib/docker/cli-plugins/regctl
 COPY --from=fetcher /regbot /usr/lib/docker/cli-plugins/regbot
 COPY --from=fetcher /regsync /usr/lib/docker/cli-plugins/regsync
-
-#RUN apk add curl bash git jq skopeo 
 
 RUN (test -e /etc/scripts||mkdir /etc/scripts) || true 
 RUN git clone https://gitlab.com/the-foundation/docker-squash-multiarch.git /etc/scripts/docker-squash-multiarch
