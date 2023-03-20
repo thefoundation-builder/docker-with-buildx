@@ -27,3 +27,4 @@ RUN chmod +x /etc/scripts/docker-squash-multiarch/docker-squash-multiarch.sh || 
 COPY finalize.sh /root/.finalize.sh
 RUN /bin/bash    /root/.finalize.sh
 RUN for thingy in regctl regbot regsync skopeo docker-squash ;do which "$thingy";done
+###
