@@ -13,7 +13,7 @@ RUN /bin/bash /root/.setup.sh
 ## FAILED: docker:latest is only aarch64 and amd64
 #FROM docker:${DOCKER_VERSION}
 FROM alpine
-RUN apk add curl  sed grep date jq bash curl bind-tools git bash jq procps date bash docker docker-compose docker-cli ca-certificates ip6tables py3-pip skopeo
+RUN apk add curl  sed grep date jq bash curl bind-tools git bash jq procps date bash docker-bash-completion cpulimit docker-compose docker-cli ca-certificates ip6tables py3-pip skopeo
 COPY --from=fetcher /docker-buildx /usr/lib/docker/cli-plugins/docker-buildx
 COPY --from=fetcher /regctl /usr/lib/docker/cli-plugins/regctl
 COPY --from=fetcher /regbot /usr/lib/docker/cli-plugins/regbot
