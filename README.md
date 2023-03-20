@@ -1,13 +1,13 @@
 # docker image with buildx installed
 
 ## Features
-**improved** version of https://github.com/jdrouet/docker-with-buildx.git  | 
-Featuring:
-* skopeo | 
-* regclient aka [ regctl regsync regbot ] |
+**improved** version of https://github.com/jdrouet/docker-with-buildx.git
+
+* skopeo
+* regclient aka [ regctl regsync regbot ]
 * docker-squash
-* docker-squash-multiarch 
-* buildx 
+* docker-squash-multiarch
+* buildx
 
 
 
