@@ -80,8 +80,6 @@ jobs:
       contents: read
     if: github.repository_owner == 'thefoundation-builder'
     steps:
-      - name: Show sources and Targets
-        run: echo "BUILDCACHE: $BUILDCACHE "
       - uses: actions/checkout@v3
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
