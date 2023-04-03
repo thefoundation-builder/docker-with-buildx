@@ -15,10 +15,11 @@ RUN /bin/bash /root/.setup.sh
 FROM alpine
 RUN apk add curl sudo sed grep psmisc procps coreutils jq bash curl bind-tools git shadow procps openssh-client btrfs-progs e2fsprogs e2fsprogs-extra ip6tables iptables openssl shadow-uidmap xfsprogs xz pigz   docker-bash-completion cpulimit docker-compose docker-cli ca-certificates ip6tables py3-pip skopeo 
 COPY --from=fetcher /docker-buildx /usr/lib/docker/cli-plugins/docker-buildx
-COPY --from=fetcher /regctl /usr/lib/docker/cli-plugins/regctl
-COPY --from=fetcher /regbot /usr/lib/docker/cli-plugins/regbot
-COPY --from=fetcher /regsync /usr/lib/docker/cli-plugins/regsync
+COPY --from=fetcher /regctl  /usr/bin/regctl
+COPY --from=fetcher /regbot  /usr/bin/regbot
+COPY --from=fetcher /regsync /usr/bin/regsync
 
+RUN grep "^Not Found" /usr/bin/regctl /usr/bin/regbot /usr/bin/regsync && exit 1
 RUN (test -e /etc/scripts||mkdir /etc/scripts) || true 
 RUN git clone https://gitlab.com/the-foundation/docker-squash-multiarch.git /etc/scripts/docker-squash-multiarch
 RUN ln -s /etc/scripts/docker-squash-multiarch/docker-squash-multiarch.sh /usr/bin/docker-squash-multiarch
