@@ -5,14 +5,45 @@ before_script:
 #  - /bin/bash -c "test -d $HOME && (test -d ${HOME}/.ssh || mkdir -p  $HOME/.ssh) || mkdir -p  $HOME/.ssh "
 #  - ssh-keyscan -t rsa,dsa,ecdsa github.com >> ~/.ssh/ssh_known_hosts
 stages:
+  - init
   - mirror
-  
+
+
 variables:
   MIRROR_REPOSITORY: "git@github.com:thefoundation-builder/$CI_PROJECT_NAME.git"
+  RUNNER_REPO: thefoundation-builder/gitlab-ci-runner
+  GIT_SUBMODULE_STRATEGY: recursive
+#  DOCKER_HOST: tcp://docker:2375/
+##  DOCKER_TLS_VERIFY: 0
+#  DOCKER_TLS_CERTDIR: ""
+#  DOCKER_DRIVER: overlay2
+
+
+
+requestrunner:
+  stage: init
+  image: ghcr.io/thefoundation-builder/alpine-ci-minimal:latest
+  #image: alpine
+  when: delayed
+  start_in: 1 s
+  only:
+  - master
+  script:
+#      - docker ps -a 
+      - bash _0_request-github-actions-gitlab-runner.sh "${GITHUB_RUNNER_TOKEN}" "${RUNNER_REPO}" "${CI_PIPELINE_ID}" "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_SHORT_SHA}"
+
+
 
 mirror-github:
   stage: mirror
   cache: {}
+  when: delayed
+  start_in: 42 s
+  tags:
+    - docker
+    - linux
+    - "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_SHORT_SHA}"
+
   only:
     refs:
       - main
