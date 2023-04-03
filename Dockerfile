@@ -19,13 +19,14 @@ COPY --from=fetcher /regctl  /usr/bin/regctl
 COPY --from=fetcher /regbot  /usr/bin/regbot
 COPY --from=fetcher /regsync /usr/bin/regsync
 
-RUN grep "^Not Found" /usr/bin/regctl /usr/bin/regbot /usr/bin/regsync && exit 1
+RUN chmod +x /usr/bin/regctl /usr/bin/regbot /usr/bin/regsync /usr/lib/docker/cli-plugins/docker-buildx 
+RUN grep "^Not Found$" /usr/bin/regctl /usr/bin/regbot /usr/bin/regsync /usr/lib/docker/cli-plugins/docker-buildx && exit 1
 RUN (test -e /etc/scripts||mkdir /etc/scripts) || true 
 RUN git clone https://gitlab.com/the-foundation/docker-squash-multiarch.git /etc/scripts/docker-squash-multiarch
 RUN ln -s /etc/scripts/docker-squash-multiarch/docker-squash-multiarch.sh /usr/bin/docker-squash-multiarch
 RUN chmod +x /etc/scripts/docker-squash-multiarch/docker-squash-multiarch.sh || true 
 COPY finalize.sh /root/.finalize.sh
 RUN /bin/bash    /root/.finalize.sh
-RUN for thingy in regctl regbot regsync skopeo docker-squash ;do which "$thingy";done
+RUN echo checking for regctl regbot regsync skopeo docker-squash && for thingy in regctl regbot regsync skopeo docker-squash ;do which "$thingy" || exit 1 ;done 
 VOLUME /var/lib/docker
 EXPOSE 2375 2376
