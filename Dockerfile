@@ -20,6 +20,8 @@ COPY --from=fetcher /regbot  /usr/bin/regbot
 COPY --from=fetcher /regsync /usr/bin/regsync
 
 RUN chmod +x /usr/bin/regctl /usr/bin/regbot /usr/bin/regsync /usr/lib/docker/cli-plugins/docker-buildx 
+
+## check regctl only for _64 archs since there is no i386 and probably no arm(v7/hf)
 RUN bash -c 'uname -m |grep -q 64 || exit 0 ;uname -m |grep -q 64 && grep -h "^Not Found$" /usr/bin/regctl /usr/bin/regbot /usr/bin/regsync /usr/lib/docker/cli-plugins/docker-buildx |wc -l |grep ^0$'
 RUN (test -e /etc/scripts||mkdir /etc/scripts) || true 
 RUN git clone https://gitlab.com/the-foundation/docker-squash-multiarch.git /etc/scripts/docker-squash-multiarch
