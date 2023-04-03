@@ -30,7 +30,7 @@ requestrunner:
   - master
   script:
 #      - docker ps -a 
-      - bash _0_request-github-actions-gitlab-runner.sh "${GITHUB_RUNNER_TOKEN}" "${RUNNER_REPO}" "${CI_PIPELINE_ID}" "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_SHORT_SHA}"
+      - bash _0_request-runner.sh "${GITHUB_RUNNER_TOKEN}" "${RUNNER_REPO}" "${CI_PIPELINE_ID}" "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_SHORT_SHA}"
 
 
 
