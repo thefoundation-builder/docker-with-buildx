@@ -20,7 +20,7 @@ COPY --from=fetcher /regbot  /usr/bin/regbot
 COPY --from=fetcher /regsync /usr/bin/regsync
 
 RUN chmod +x /usr/bin/regctl /usr/bin/regbot /usr/bin/regsync /usr/lib/docker/cli-plugins/docker-buildx 
-RUN grep "^Not Found$" /usr/bin/regctl /usr/bin/regbot /usr/bin/regsync /usr/lib/docker/cli-plugins/docker-buildx && exit 1
+RUN grep -v "^Not Found$" /usr/bin/regctl /usr/bin/regbot /usr/bin/regsync /usr/lib/docker/cli-plugins/docker-buildx 
 RUN (test -e /etc/scripts||mkdir /etc/scripts) || true 
 RUN git clone https://gitlab.com/the-foundation/docker-squash-multiarch.git /etc/scripts/docker-squash-multiarch
 RUN ln -s /etc/scripts/docker-squash-multiarch/docker-squash-multiarch.sh /usr/bin/docker-squash-multiarch
