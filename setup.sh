@@ -15,7 +15,7 @@ curl -L \
 for thingy in regctl regbot regsync;do 
 curl -L \
   --output "/$thingy" \
-  "https://github.com/regclient/regclient/releases/download/v${BUILDX_VERSION}/${thingy}-v${BUILDX_VERSION}.linux-${BUILD_ARCH}" && chmod a+x "/$thingy"
+  "https://github.com/regclient/regclient/releases/download/v${REGCTL_VERSION}/${thingy}-v${REGCTL_VERSION}.linux-${BUILD_ARCH}" && chmod a+x "/$thingy"
 done
 
 
