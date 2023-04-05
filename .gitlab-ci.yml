@@ -8,7 +8,6 @@ stages:
   - init
   - mirror
 
-
 variables:
   MIRROR_REPOSITORY: "git@github.com:thefoundation-builder/$CI_PROJECT_NAME.git"
   RUNNER_REPO: thefoundation-builder/gitlab-ci-runner
@@ -17,8 +16,6 @@ variables:
 ##  DOCKER_TLS_VERIFY: 0
 #  DOCKER_TLS_CERTDIR: ""
 #  DOCKER_DRIVER: overlay2
-
-
 
 requestrunner:
   stage: init
@@ -31,8 +28,6 @@ requestrunner:
   script:
 #      - docker ps -a 
       - bash _0_request-runner.sh "${GITHUB_RUNNER_TOKEN}" "${RUNNER_REPO}" "${CI_PIPELINE_ID}" "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_SHORT_SHA}"
-
-
 
 mirror-github:
   stage: mirror
