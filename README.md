@@ -3,11 +3,18 @@
 ## Features
 **improved** version of https://github.com/jdrouet/docker-with-buildx.git
 
-* skopeo
-* regclient aka [ regctl regsync regbot ]
-* docker-squash
-* docker-squash-multiarch
-* buildx
+Includded binaries 
+
+| Program |availability | 
+|--|--|
+| skopeo | all_arch |
+| regclient aka [ regctl regsync regbot ]  | x6_64 + arm64v8 |
+| docker-squash | all_arch |
+| docker-squash-multiarch | all_arch |
+| buildx | all_arch |
+| gh   ( github CLI ) | all_arch |
+| glab ( gitlab CLI ) | all_arch |
+
 
 ## Architectures: 
 
